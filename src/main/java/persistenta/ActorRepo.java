@@ -35,7 +35,7 @@ public class ActorRepo {
             return false;
         }
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("insert into GenericActors(username, password, userType) values (?,?,1);")) {
+        try (PreparedStatement preStm = con.prepareStatement("insert into genericactors(username, password, userType) values (?,?,1);")) {
             preStm.setString(1, username);
             preStm.setString(2, password);
             preStm.executeUpdate();
@@ -51,7 +51,7 @@ public class ActorRepo {
             return false;
         }
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("insert into GenericActors(username, password, userType) values (?,?,2);")) {
+        try (PreparedStatement preStm = con.prepareStatement("insert into genericactors(username, password, userType) values (?,?,2);")) {
             preStm.setString(1, username);
             preStm.setString(2, password);
             preStm.executeUpdate();
@@ -64,7 +64,7 @@ public class ActorRepo {
 
     public boolean loginAdmin(String username, String password) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("select * from GenericActors where username=? AND password=? AND userType=0;")) {
+        try (PreparedStatement preStm = con.prepareStatement("select * from genericactors where username=? AND password=? AND userType=0;")) {
             preStm.setString(1, username);
             preStm.setString(2, password);
             ResultSet result = preStm.executeQuery();
@@ -89,7 +89,7 @@ public class ActorRepo {
 
     public boolean loginMedic(String username, String password) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("select * from GenericActors where username=? AND password=? AND userType=1;")) {
+        try (PreparedStatement preStm = con.prepareStatement("select * from genericactors where username=? AND password=? AND userType=1;")) {
             preStm.setString(1, username);
             preStm.setString(2, password);
             ResultSet result = preStm.executeQuery();
@@ -114,7 +114,7 @@ public class ActorRepo {
 
     public boolean loginFarmacist(String username, String password) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("select * from GenericActors where username=? AND password=? AND userType=2;")) {
+        try (PreparedStatement preStm = con.prepareStatement("select * from genericactors where username=? AND password=? AND userType=2;")) {
             preStm.setString(1, username);
             preStm.setString(2, password);
             ResultSet result = preStm.executeQuery();

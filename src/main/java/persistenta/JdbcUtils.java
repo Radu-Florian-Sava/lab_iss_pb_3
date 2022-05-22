@@ -13,7 +13,7 @@ public class JdbcUtils {
 
     public JdbcUtils(Properties props) {
         jdbcProps = props;
-        jdbcProps.setProperty("foreign_keys", "on");
+        //jdbcProps.setProperty("foreign_keys", "on");
     }
 
     private Connection getNewConnection() {
@@ -23,7 +23,6 @@ public class JdbcUtils {
         String pass = jdbcProps.getProperty("jdbc.pass");
         Connection con = null;
         try {
-
             if (user != null && pass != null)
                 con = DriverManager.getConnection(url, user, pass);
             else

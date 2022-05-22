@@ -1,4 +1,4 @@
-module iss.ubbcluj.ro.interfataisspb3 {
+module iss.ubbcluj.ro.interfataisspb {
     requires javafx.controls;
     requires javafx.fxml;
 
