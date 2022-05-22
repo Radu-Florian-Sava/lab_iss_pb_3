@@ -19,6 +19,7 @@ public class AdminController {
     TextField nameTextField;
     @FXML
     PasswordField passwordTextField;
+
     private ActorService actorService;
 
     @FXML
@@ -30,6 +31,9 @@ public class AdminController {
     void login() {
         if (actorService.loginAdmin(nameTextField.getText(), passwordTextField.getText())) {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fereastraAdministrator.fxml"));
+            LoggedAdminController loggedAdminController = new LoggedAdminController();
+            loggedAdminController.setActorService(actorService);
+            fxmlLoader.setController(loggedAdminController);
             Stage stage = new Stage();
             stage.setTitle("Autentificat ca si " + nameTextField.getText());
             try {
@@ -49,4 +53,5 @@ public class AdminController {
             alert.show();
         }
     }
+
 }

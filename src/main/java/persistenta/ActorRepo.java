@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Properties;
 
 public class ActorRepo {
@@ -27,6 +28,38 @@ public class ActorRepo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean addMedic(String username, String password, String checkPassword) {
+        if (!Objects.equals(checkPassword, password)) {
+            return false;
+        }
+        Connection con = dbUtils.getConnection();
+        try (PreparedStatement preStm = con.prepareStatement("insert into GenericActors(username, password, userType) values (?,?,1);")) {
+            preStm.setString(1, username);
+            preStm.setString(2, password);
+            preStm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Error BD" + ex);
+        }
+        return false;
+    }
+
+    public boolean addFarmacist(String username, String password, String checkPassword) {
+        if (!Objects.equals(checkPassword, password)) {
+            return false;
+        }
+        Connection con = dbUtils.getConnection();
+        try (PreparedStatement preStm = con.prepareStatement("insert into GenericActors(username, password, userType) values (?,?,2);")) {
+            preStm.setString(1, username);
+            preStm.setString(2, password);
+            preStm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Error BD" + ex);
+        }
+        return false;
     }
 
     public boolean loginAdmin(String username, String password) {

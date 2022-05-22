@@ -11,7 +11,6 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("loginAdmin.fxml"));
-        //fxmlLoader.setController(new NonAdminController());
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Farmacie");
         stage.setScene(scene);

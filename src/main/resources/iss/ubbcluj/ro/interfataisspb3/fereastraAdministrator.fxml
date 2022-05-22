@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -50,8 +50,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Adauga cont sectie" />
-            <Button mnemonicParsing="false" text="Adauga cont farmacie" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#addSectie" text="Adauga cont sectie" />
+            <Button mnemonicParsing="false" onAction="#addFarmacie" text="Adauga cont farmacie" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Modifica cont" GridPane.rowIndex="2" />
          </children>
       </GridPane>
@@ -67,9 +67,9 @@
         </rowConstraints>
          <children>
             <Label text="Lista conturi" GridPane.rowIndex="3" />
-            <TextField text="Nume utilizator" />
-            <TextField text="Parola" GridPane.rowIndex="1" />
-            <TextField text="Parola" GridPane.rowIndex="2" />
+            <TextField fx:id="addUsername" text="Nume utilizator" />
+            <TextField fx:id="addPassword" text="Parola" GridPane.rowIndex="1" />
+            <TextField fx:id="addCheckPassword" text="Parola" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
