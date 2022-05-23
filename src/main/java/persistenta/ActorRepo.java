@@ -5,12 +5,11 @@ import model.Administrator;
 import model.Farmacist;
 import model.GenericActor;
 import model.Sectie;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Properties;
@@ -18,8 +17,10 @@ import java.util.Properties;
 public class ActorRepo {
     private HashMap<String, GenericActor> elems;
     private JdbcUtils dbUtils;
+    private SessionFactory sessionFactory;
 
-    public ActorRepo() {
+    public ActorRepo(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
         this.elems = new HashMap<>();
         try {
             Properties props = new Properties();
@@ -30,109 +31,75 @@ public class ActorRepo {
         }
     }
 
+    @Transactional
     public boolean addMedic(String username, String password, String checkPassword) {
         if (!Objects.equals(checkPassword, password)) {
             return false;
         }
-        Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("insert into genericactors(username, password, userType) values (?,?,1);")) {
-            preStm.setString(1, username);
-            preStm.setString(2, password);
-            preStm.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("Error BD" + ex);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(new Sectie(username, password));
+            session.getTransaction().commit();
+            session.close();
         }
-        return false;
+        return true;
     }
 
+    @Transactional
     public boolean addFarmacist(String username, String password, String checkPassword) {
         if (!Objects.equals(checkPassword, password)) {
             return false;
         }
-        Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("insert into genericactors(username, password, userType) values (?,?,2);")) {
-            preStm.setString(1, username);
-            preStm.setString(2, password);
-            preStm.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("Error BD" + ex);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(new Farmacist(username, password));
+            session.getTransaction().commit();
+            session.close();
         }
-        return false;
+        return true;
     }
 
+    @Transactional
     public boolean loginAdmin(String username, String password) {
-        Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("select * from genericactors where username=? AND password=? AND userType=0;")) {
-            preStm.setString(1, username);
-            preStm.setString(2, password);
-            ResultSet result = preStm.executeQuery();
-            result.next();
-            String foundUsername = result.getString("username");
-            String foundPassword = result.getString("password");
-            Administrator administrator = new Administrator(foundUsername, foundPassword);
-            result.close();
-            if (elems.containsKey(foundUsername)) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Administrator administrator = session.get(Administrator.class, username);
+            if (elems.containsKey(username)) {
                 return false;
             } else {
                 elems.put(username, administrator);
             }
-        } catch (SQLException ex) {
-            System.err.println("Error BD" + ex);
-        }
-        if (!elems.containsKey(username)) {
-            return false;
+            session.getTransaction().commit();
         }
         return elems.get(username).getParola().equals(password);
     }
 
+    @Transactional
     public boolean loginMedic(String username, String password) {
-        Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("select * from genericactors where username=? AND password=? AND userType=1;")) {
-            preStm.setString(1, username);
-            preStm.setString(2, password);
-            ResultSet result = preStm.executeQuery();
-            result.next();
-            String foundUsername = result.getString("username");
-            String foundPassword = result.getString("password");
-            Sectie sectie = new Sectie(foundUsername, foundPassword);
-            result.close();
-            if (elems.containsKey(foundUsername)) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Sectie sectie = session.get(Sectie.class, username);
+            if (elems.containsKey(username)) {
                 return false;
             } else {
                 elems.put(username, sectie);
             }
-        } catch (SQLException ex) {
-            System.err.println("Error BD" + ex);
-        }
-        if (!elems.containsKey(username)) {
-            return false;
+            session.getTransaction().commit();
         }
         return elems.get(username).getParola().equals(password);
     }
 
+    @Transactional
     public boolean loginFarmacist(String username, String password) {
-        Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStm = con.prepareStatement("select * from genericactors where username=? AND password=? AND userType=2;")) {
-            preStm.setString(1, username);
-            preStm.setString(2, password);
-            ResultSet result = preStm.executeQuery();
-            result.next();
-            String foundUsername = result.getString("username");
-            String foundPassword = result.getString("password");
-            Farmacist farmacist = new Farmacist(foundUsername, foundPassword);
-            result.close();
-            if (elems.containsKey(foundUsername)) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Farmacist farmacist = session.get(Farmacist.class, username);
+            if (elems.containsKey(username)) {
                 return false;
             } else {
                 elems.put(username, farmacist);
             }
-        } catch (SQLException ex) {
-            System.err.println("Error BD" + ex);
-        }
-        if (!elems.containsKey(username)) {
-            return false;
+            session.getTransaction().commit();
         }
         return elems.get(username).getParola().equals(password);
     }

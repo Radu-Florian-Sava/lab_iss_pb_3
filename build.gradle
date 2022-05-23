@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 group 'iss.ubbcluj.ro'
@@ -23,26 +23,23 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'iss.ubbcluj.ro.interfataisspb3'
-    mainClass = 'iss.ubbcluj.ro.interfataisspb3.HelloApplication'
+    mainClass = 'iss.ubbcluj.ro.interfataisspb3.MainApplication'
 }
 
 javafx {
-    version = '17'
+    version = '11.0.2'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
-    implementation('org.controlsfx:controlsfx:11.1.1')
-    implementation('com.dlsc.formsfx:formsfx-core:11.5.0') {
-        exclude(group: 'org.openjfx')
-    }
-    implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
-    implementation 'com.noelherrick:jell:0.1.1'
-    implementation 'org.hibernate:hibernate-core:6.0.1.Final'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+    implementation 'org.javassist:javassist:3.28.0-GA'
+    implementation 'org.hibernate:hibernate-core:5.2.10.Final'
+
+
 }
 
 test {

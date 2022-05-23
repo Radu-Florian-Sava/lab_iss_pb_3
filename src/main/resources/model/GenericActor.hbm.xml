@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 5.3//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="model.GenericActor" table="genericactors" discriminator-value="userType">
+        <id name="numeUtilizator" type="java.lang.String" column="username"/>
+
+        <discriminator column="userType" type="integer"/>
+
+        <property name="parola" column="password" type="java.lang.String"/>
+
+        <subclass name="model.Administrator" discriminator-value="0"/>
+
+        <subclass name="model.Sectie" discriminator-value="1"/>
+
+        <subclass name="model.Farmacist" discriminator-value="2"/>
+    </class>
+
+</hibernate-mapping>

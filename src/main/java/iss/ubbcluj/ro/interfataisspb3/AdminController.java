@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import persistenta.ActorRepo;
+import persistenta.SessionFactorySingleton;
 import service.ActorService;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class AdminController {
 
     @FXML
     void initialize() {
-        actorService = new ActorService(new ActorRepo());
+        actorService = new ActorService(new ActorRepo(SessionFactorySingleton.getSessionFactory()));
     }
 
     @FXML
