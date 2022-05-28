@@ -27,4 +27,9 @@ public class MedicamentService {
     public List<Medicament> getAll(){
         return medicamentRepo.getAll();
     }
+
+    public List<Medicament> getAllVisible(){
+        return medicamentRepo.getAllVisible();
+    }
+
 }

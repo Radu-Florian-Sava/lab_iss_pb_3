@@ -8,9 +8,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import persistenta.ActorRepo;
+import persistenta.MedicamentRepo;
 import persistenta.RetetaRepo;
 import persistenta.SessionFactorySingleton;
 import service.ActorService;
+import service.MedicamentService;
 import service.RetetaService;
 
 import java.io.IOException;
@@ -35,12 +37,14 @@ public class NonAdminController {
             Stage stage = new Stage();
             stage.setTitle("Autentificat ca si " + medicNameTextField.getText());
             try {
+                SectieController sectieController = new SectieController();
+                sectieController.setRetetaService(new RetetaService(new RetetaRepo(SessionFactorySingleton.getSessionFactory())));
+                sectieController.setMedicamentService(new MedicamentService(new MedicamentRepo(SessionFactorySingleton.getSessionFactory())));
+                sectieController.setUsername(medicNameTextField.getText());
+                fxmlLoader.setController(sectieController);
+                stage.setTitle("Autentificat ca si " + medicNameTextField.getText());
                 stage.setScene(new Scene(fxmlLoader.load()));
-            } catch (IOException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Eroare");
-                alert.setContentText("Credentiale incorecte");
-                alert.show();
+            } catch (IOException ignored) {
             }
             stage.show();
             medicNameTextField.getScene().getWindow().hide();

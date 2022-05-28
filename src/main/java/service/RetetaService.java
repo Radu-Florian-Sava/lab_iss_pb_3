@@ -24,4 +24,24 @@ public class RetetaService {
     public List<Reteta> getAllNeonorate() {
         return retetaRepo.getAllNeonorate();
     }
+
+    public List<Reteta> getAllNeonorateOf(String username) {
+        return retetaRepo.getAllNeonorateOf(username);
+    }
+
+    public List<Reteta> getAllOnorateOf(String username) {
+        return retetaRepo.getAllOnorateOf(username);
+    }
+
+    public void addRetetaWithLastTimestamp(Reteta reteta) {
+        retetaRepo.addRetetaWithLastTimestamp(reteta);
+    }
+
+    public void eraseTimestamp() {
+        retetaRepo.eraseTimestamp();
+    }
+
+    public void cancelCommand(RetetaId retetaId) {
+        retetaRepo.cancelCommand(retetaId);
+    }
 }

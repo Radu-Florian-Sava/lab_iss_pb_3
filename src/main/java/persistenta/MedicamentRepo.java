@@ -60,6 +60,18 @@ public class MedicamentRepo {
     }
 
     @Transactional
+    public List<Medicament> getAllVisible() {
+        List medicamentList = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            medicamentList = session.createQuery("FROM Medicament M WHERE M.utilizabil = true").list();
+            session.getTransaction().commit();
+            session.close();
+        }
+        return medicamentList;
+    }
+
+    @Transactional
     public Medicament getOne(String denumire) {
         Medicament medicament = null;
         try (Session session = sessionFactory.openSession()) {
