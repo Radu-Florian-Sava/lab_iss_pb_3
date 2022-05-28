@@ -13,5 +13,12 @@ public class Sectie extends GenericActor {
     public Sectie() {
 
     }
+
+    @Override
+    public String toString() {
+        return "Sectie{" +
+                "numeUtilizator='" + numeUtilizator + '\'' +
+                '}';
+    }
 }
 

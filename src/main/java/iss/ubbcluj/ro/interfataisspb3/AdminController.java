@@ -9,8 +9,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import persistenta.ActorRepo;
+import persistenta.MedicamentRepo;
 import persistenta.SessionFactorySingleton;
 import service.ActorService;
+import service.MedicamentService;
 
 import java.io.IOException;
 
@@ -34,6 +36,7 @@ public class AdminController {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("fereastraAdministrator.fxml"));
             LoggedAdminController loggedAdminController = new LoggedAdminController();
             loggedAdminController.setActorService(actorService);
+            loggedAdminController.setMedicamentService(new MedicamentService(new MedicamentRepo(SessionFactorySingleton.getSessionFactory())));
             fxmlLoader.setController(loggedAdminController);
             Stage stage = new Stage();
             stage.setTitle("Autentificat ca si " + nameTextField.getText());

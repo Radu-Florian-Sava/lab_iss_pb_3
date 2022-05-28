@@ -1,16 +1,14 @@
 package persistenta;
 
 import iss.ubbcluj.ro.interfataisspb3.MainApplication;
-import model.Administrator;
-import model.Farmacist;
-import model.GenericActor;
-import model.Sectie;
+import model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -102,5 +100,30 @@ public class ActorRepo {
             session.getTransaction().commit();
         }
         return elems.get(username).getParola().equals(password);
+    }
+
+    @Transactional
+    public List<GenericActor> getAllNonAdmin() {
+        List nonAdminList = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            nonAdminList = session.createCriteria(Sectie.class).list();
+            nonAdminList.addAll(session.createCriteria(Farmacist.class).list());
+            session.getTransaction().commit();
+            session.close();
+        }
+        return nonAdminList;
+    }
+
+    @Transactional
+    public GenericActor getOne(String username) {
+        GenericActor genericActor = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            genericActor = session.get(GenericActor.class, username);
+            session.getTransaction().commit();
+            session.close();
+        }
+        return genericActor;
     }
 }

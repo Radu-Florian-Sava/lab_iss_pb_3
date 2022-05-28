@@ -14,5 +14,12 @@ public class Farmacist extends GenericActor {
     public Farmacist() {
         super();
     }
+
+    @Override
+    public String toString() {
+        return "Farmacist{" +
+                "numeUtilizator='" + numeUtilizator + '\'' +
+                '}';
+    }
 }
 

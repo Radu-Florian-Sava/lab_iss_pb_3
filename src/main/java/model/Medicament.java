@@ -61,4 +61,12 @@ public class Medicament {
     public void setUtilizabil(boolean utilizabil) {
         this.utilizabil = utilizabil;
     }
+
+    @Override
+    public String toString() {
+        return "Medicament{" +
+                "denumire='" + denumire + '\'' +
+                ", doza=" + doza +
+                '}';
+    }
 }

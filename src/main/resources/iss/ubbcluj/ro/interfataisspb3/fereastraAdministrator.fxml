@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -23,26 +24,27 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ListView fx:id="listaNonAdmin" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+      <ListView fx:id="listaMedicamente" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Adauga medicament" />
-            <Button mnemonicParsing="false" text="Modifica medicament" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Sterge medicament" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#addMedicament" text="Adauga medicament" />
+            <Button mnemonicParsing="false" onAction="#toggleMedicament" prefHeight="55.0" prefWidth="126.0" text="Schimba vizibilitate medicament" wrapText="true" GridPane.rowIndex="1" />
+            <TextField fx:id="toggleDenumire" promptText="Denumire" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <GridPane GridPane.rowIndex="3">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -50,9 +52,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#addSectie" text="Adauga cont sectie" />
+            <Button mnemonicParsing="false" onAction="#addSectie" prefHeight="26.0" prefWidth="134.0" text="Adauga cont sectie" />
             <Button mnemonicParsing="false" onAction="#addFarmacie" text="Adauga cont farmacie" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Modifica cont" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane GridPane.rowIndex="1">
@@ -67,9 +68,9 @@
         </rowConstraints>
          <children>
             <Label text="Lista conturi" GridPane.rowIndex="3" />
-            <TextField fx:id="addUsername" text="Nume utilizator" />
-            <TextField fx:id="addPassword" text="Parola" GridPane.rowIndex="1" />
-            <TextField fx:id="addCheckPassword" text="Parola" GridPane.rowIndex="2" />
+            <TextField fx:id="addUsername" promptText="Nume utilizator" />
+            <TextField fx:id="addPassword" promptText="Parola" GridPane.rowIndex="1" />
+            <TextField fx:id="addCheckPassword" promptText="Parola" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -77,12 +78,16 @@
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Lista medicamente" GridPane.rowIndex="2" />
+            <Label text="Lista medicamente" GridPane.rowIndex="3" />
+            <TextField fx:id="addDenumire" promptText="Denumire" />
+            <TextField fx:id="addCantitate" promptText="Cantitate(mg)" GridPane.rowIndex="1" />
+            <TextArea fx:id="addDescriere" prefHeight="200.0" prefWidth="200.0" promptText="Descriere" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <MenuBar prefHeight="26.0" prefWidth="548.0">

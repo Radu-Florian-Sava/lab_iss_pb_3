@@ -1,9 +1,13 @@
 package service;
 
+import model.GenericActor;
 import persistenta.ActorRepo;
+
+import java.util.List;
 
 public class ActorService {
     private ActorRepo actorRepo;
+
 
     public ActorService(ActorRepo actorRepo) {
         this.actorRepo = actorRepo;
@@ -29,5 +33,11 @@ public class ActorService {
         return actorRepo.loginFarmacist(username, password);
     }
 
+    public List<GenericActor> getAllNonAdmin(){
+        return actorRepo.getAllNonAdmin();
+    }
 
+    public GenericActor getOne(String username){
+        return actorRepo.getOne(username);
+    }
 }
