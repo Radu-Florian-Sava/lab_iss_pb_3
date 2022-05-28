@@ -22,7 +22,7 @@
         <mapping resource="model/GenericActor.hbm.xml" class="model.Administrator"/>
         <mapping resource="model/GenericActor.hbm.xml" class="model.Farmacist"/>
         <mapping resource="model/GenericActor.hbm.xml" class="model.Sectie"/>
-
-
+        <mapping resource="model/Reteta.hbm.xml.tld" class="model.Reteta"/>
+        <mapping resource="model/Reteta.hbm.xml.tld" class="model.RetetaId"/>
     </session-factory>
 </hibernate-configuration>
