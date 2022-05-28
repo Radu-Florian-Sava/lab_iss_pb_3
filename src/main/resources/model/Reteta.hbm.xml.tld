@@ -8,10 +8,10 @@
 
     <class name="model.Reteta" table="retete">
         <composite-id name="id" class="RetetaId">
-            <key-property name="idNumeric" type="int" column="data"/>
+            <key-property name="data" type="int" column="data"/>
+            <key-property name="numeSectie" type="string" column="numeSectie"/>
             <key-property name="numeMedicament" type="string" column="numeMedicament"/>
         </composite-id>
-        <property name="numeSectie" type="string" column="numeSectie"/>
         <property name="cantitate" type="java.lang.Integer" column="cantitate"/>
         <property name="onorata" type="java.lang.Boolean" column="onorata"/>
     </class>

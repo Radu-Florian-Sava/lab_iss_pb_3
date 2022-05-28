@@ -10,23 +10,24 @@ import java.util.Objects;
 
 @Embeddable
 public class RetetaId implements Serializable {
-    private static final long serialVersionUID = -1665935185551500170L;
+    private static final long serialVersionUID = 2630509155780170282L;
     @Column(name = "data", nullable = false)
     private LocalDateTime data;
     @Column(name = "numeMedicament", nullable = false, length = 30)
     private String numeMedicament;
-
-    public RetetaId(LocalDateTime data, String numeMedicament) {
-        this.data = data;
-        this.numeMedicament = numeMedicament;
-    }
-
-    public RetetaId(String numeMedicament) {
-        this.data = LocalDateTime.now();
-        this.numeMedicament = numeMedicament;
-    }
+    @Column(name = "numeSectie", nullable = false, length = 20)
+    private String numeSectie;
 
     public RetetaId() {
+        this.data = LocalDateTime.now();
+    }
+
+    public String getNumeSectie() {
+        return numeSectie;
+    }
+
+    public void setNumeSectie(String numeSectie) {
+        this.numeSectie = numeSectie;
     }
 
     public String getNumeMedicament() {
@@ -47,7 +48,7 @@ public class RetetaId implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(data, numeMedicament);
+        return Objects.hash(data, numeSectie, numeMedicament);
     }
 
     @Override
@@ -56,6 +57,12 @@ public class RetetaId implements Serializable {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         RetetaId entity = (RetetaId) o;
         return Objects.equals(this.data, entity.data) &&
+                Objects.equals(this.numeSectie, entity.numeSectie) &&
                 Objects.equals(this.numeMedicament, entity.numeMedicament);
+    }
+
+    @Override
+    public String toString() {
+        return numeSectie + " : " + data;
     }
 }

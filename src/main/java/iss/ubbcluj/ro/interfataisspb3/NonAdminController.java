@@ -8,8 +8,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import persistenta.ActorRepo;
+import persistenta.RetetaRepo;
 import persistenta.SessionFactorySingleton;
 import service.ActorService;
+import service.RetetaService;
 
 import java.io.IOException;
 
@@ -57,6 +59,10 @@ public class NonAdminController {
             Stage stage = new Stage();
             stage.setTitle("Autentificat ca si " + farmacistNameTextField.getText());
             try {
+                FarmacistController farmacistController = new FarmacistController();
+                farmacistController.setRetetaService(new RetetaService(new RetetaRepo(SessionFactorySingleton.getSessionFactory())));
+                fxmlLoader.setController(farmacistController);
+                stage.setTitle("Autentificat ca si " + farmacistNameTextField.getText());
                 stage.setScene(new Scene(fxmlLoader.load()));
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -13,22 +13,27 @@ public class Reteta {
     @JoinColumn(name = "numeMedicament", nullable = false)
     private Medicament numeMedicament;
 
+    @MapsId("numeSectie")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "numeSectie", nullable = false)
+    private GenericActor numeSectie;
+
     @Column(name = "cantitate")
     private Integer cantitate;
 
     @Column(name = "onorata")
     private Boolean onorata;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "numeSectie")
-    private GenericActor numeSectie;
-
-    public GenericActor getNumeSectie() {
-        return numeSectie;
+    public Reteta(RetetaId id, Medicament numeMedicament, GenericActor numeSectie, Integer cantitate) {
+        this.id = id;
+        this.numeMedicament = numeMedicament;
+        this.numeSectie = numeSectie;
+        this.cantitate = cantitate;
+        this.onorata = false;
     }
 
-    public void setNumeSectie(GenericActor numeSectie) {
-        this.numeSectie = numeSectie;
+    public Reteta() {
+        this.id = new RetetaId();
     }
 
     public Boolean getOnorata() {
@@ -47,12 +52,22 @@ public class Reteta {
         this.cantitate = cantitate;
     }
 
+    public GenericActor getNumeSectie() {
+        return numeSectie;
+    }
+
+    public void setNumeSectie(GenericActor numeSectie) {
+        this.numeSectie = numeSectie;
+        id.setNumeSectie(numeSectie.getNumeUtilizator());
+    }
+
     public Medicament getNumeMedicament() {
         return numeMedicament;
     }
 
     public void setNumeMedicament(Medicament numeMedicament) {
         this.numeMedicament = numeMedicament;
+        id.setNumeMedicament(numeMedicament.getDenumire());
     }
 
     public RetetaId getId() {
@@ -61,5 +76,10 @@ public class Reteta {
 
     public void setId(RetetaId id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Reteta{" + id + '}';
     }
 }
