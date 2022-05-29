@@ -18,18 +18,10 @@ import java.util.Properties;
 
 public class RetetaRepo {
     private SessionFactory sessionFactory;
-    private JdbcUtils dbUtils;
     private LocalDateTime lastDateTime;
 
     public RetetaRepo(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-        try {
-            Properties props = new Properties();
-            props.load(MainApplication.class.getResourceAsStream("db.properties"));
-            dbUtils = new JdbcUtils(props);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Transactional

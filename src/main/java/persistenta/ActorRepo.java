@@ -1,32 +1,23 @@
 package persistenta;
 
-import iss.ubbcluj.ro.interfataisspb3.MainApplication;
-import model.*;
+import model.Administrator;
+import model.Farmacist;
+import model.GenericActor;
+import model.Sectie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.Properties;
 
 public class ActorRepo {
     private HashMap<String, GenericActor> elems;
-    private JdbcUtils dbUtils;
     private SessionFactory sessionFactory;
 
     public ActorRepo(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-        this.elems = new HashMap<>();
-        try {
-            Properties props = new Properties();
-            props.load(MainApplication.class.getResourceAsStream("db.properties"));
-            dbUtils = new JdbcUtils(props);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Transactional
