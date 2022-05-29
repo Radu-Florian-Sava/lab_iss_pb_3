@@ -18,6 +18,7 @@ public class ActorRepo {
 
     public ActorRepo(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+        elems = new HashMap<>();
     }
 
     @Transactional
